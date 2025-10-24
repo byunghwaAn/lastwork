@@ -1,0 +1,28 @@
+---
+- name: handlers demo 1
+  hosts: db
+  tasks:
+    - name: install nginx pkg
+      dnf:
+        name: nginx
+        state: present
+   
+    - name: change default webpage
+      copy:
+        content: "Hello 3 Day"
+        dest: /usr/share/nginx/html/index.html
+      notify: restart_web
+   
+    - name: print dummy MSG 1
+      debug:
+        msg: today is so cold
+    - name: print dummy MSG 2
+      debug:
+        msg: check your health
+
+
+  handlers:
+    - name: restart_web
+      service:
+        name: nginx
+        state: restarted

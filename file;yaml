@@ -1,0 +1,15 @@
+---
+- name: file module demo 1
+  hosts: servera.test.com
+  tasks:
+    - name: create Directory
+      file:
+        path: /tmp/awx
+        state: directory
+        mode: '0750'
+
+
+    - name: create empty file
+      file:
+        path: /tmp/awx/hpe.txt
+        state: touch
